@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # This is a function to define dictionaries
 # for different modes of opening files
 
