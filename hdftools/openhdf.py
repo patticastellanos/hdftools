@@ -25,7 +25,7 @@ def openhdf(filename, verbose=None, read_mode=None, hdf4type=None):
 	 default is read-mode"""
 	
 	#this returns a dictionary of functions for the file type	
-	modehdf = openhdf_modes(filename,filetype, hdf4type)
+	modehdf = openhdf_modes(filename,filetype)
 	if read_mode is None:
 		read_mode = 'read'
 	elif read_mode.lower() not in ['read','write','append']:
