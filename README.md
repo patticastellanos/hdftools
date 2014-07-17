@@ -22,6 +22,8 @@ HDF Tools relies on having the HDF4 and HDF5 libraries, as well as the pyhdf and
 
 ###Download and install the JPEG, PNG, and SZIP libraries
 
+This is [an example](http://www.slate.com/ "Title") inline link.
+
 JPEG and PNG:
 Download the disk image from this `link` <http://ethan.tira-thompson.com/Mac%20OS%20X%20Ports_files/libjpeg-libpng%20%28universal%29.dmg>.
 
