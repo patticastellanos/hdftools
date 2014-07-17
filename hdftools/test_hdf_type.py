@@ -1,14 +1,14 @@
-
-# This is a simple function to return the type of HDF file that is passed to it
+#!/usr/bin/python
+import pyhdf.HDF as HDF4
+import tables as HDF5
+""" This is a simple function to return the type of HDF file that is passed to it"""
 def test_hdf_type(filename):
 
-	
-	import pyhdf.HDF as HDF4
-	import tables as HDF5
+	filetype = None
 
-	#check to see if file is an hdf4 file
-	#returns 1 if HDF4 file
-	#returns 0 if not an HDF4 file
+	"""check to see if file is an hdf4 file
+	returns 1 if HDF4 file
+	returns 0 if not an HDF4 file"""
 	hdf4flag = HDF4.ishdf(filename)
 
 	if hdf4flag == 1:
