@@ -54,13 +54,13 @@ Execute the following:
 	make check
 	make install
 
-#####pyhdf package
+#####pyhdf Package
 
 Download the latest version of pyhdf
 
 	svn checkout https://pysclint.svn.sourceforge.net/svnroot/pysclint/trunk/pyhdf
 
-Execute at the command line
+Execute the following
 
 	sudo env INCLUDE_DIRS=${LibDir}/include LIBRARY_DIRS=${LibDir}/lib python setup.py install
 
@@ -70,14 +70,14 @@ Execute at the command line
 
 Download the latest version of HDF5
 
-		curl http://http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.13.tar.gz | tar xzf -
+	curl http://http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.13.tar.gz | tar xzf -
 
 Execute the following:
 
-		./configure --prefix=${LibDir} --disable-fortran --enable-production --with-	szlib=${LibDir} CPPFLAGS=-I${LibDir}/include LDFLAGS=-L${LibDir}/lib
-		make
-		make check
-		make install
+	./configure --prefix=${LibDir} --disable-fortran --enable-production --with-	szlib=${LibDir} CPPFLAGS=-I${LibDir}/include LDFLAGS=-L${LibDir}/lib
+	make
+	make check
+	make install
 
 #####PyTables Package
 
@@ -87,13 +87,12 @@ Install nuexpr
 
 Install cython
 
-		easy_install cython
-
-[This link](http://example.net/) has no title attribute.
+	easy_install cython
 
 Download latest version of Pytables from http://downloads.sourceforge.net/project/pytables/pytables 
 
-	4. Execute at the command line:
+Execute the following:
+
 	sudo python setup.py build_ext  --hdf5=${LibDir} --inplace
 	sudo python setup.py install  --hdf5=${LibDir}
 
