@@ -15,5 +15,5 @@ setup(
     url='https://github.com/patticastellanos/hdftools',
     license='LICENSE.txt',
     description='Wrapper for pyhdf and PyTables',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
 )
