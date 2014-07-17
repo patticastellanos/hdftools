@@ -1,10 +1,28 @@
 #!/usr/bin/python
-# This is a function to define dictionaries
-# for different modes of opening files
+import tables as HDF5
+import pyhdf.HDF as HDF4
+import pyhdf.SD as HDF4SD
 
-def openhdf_modes(filename, filetype,hdf4type=None):
+""" This is a function to define dictionaries
+ for different modes of opening files"""
 
-    modehdf = None
+
+class HDF4file():
+    def __init__(self,SD,VD,VDfile):
+        self.SD = SD
+        self.VD = VD 
+        self.VDfile = VDfile
+###########################################################################
+def is_empty(any_structure):
+    if any_structure:
+        #print('Structure is not empty.')
+        return False
+    else:
+        #print('Structure is empty.')
+        return True
+###########################################################################
+def openhdf_modes(filename, filetype):
+
     # create a dictionary where the read-mode 
     # of the file is linked to a function that
     # reads in the file
@@ -17,15 +35,8 @@ def openhdf_modes(filename, filetype,hdf4type=None):
     #       and if the file does not exist it is created.
 
     #HDF5
-
-    if filetype.upper() == 'HDF4' and hdf4type is None:
-        print 'Please provide an HDF4type'
-        print 'Your options are HDF4type = "SD" or "VD"'
-        return
-
     if filetype.upper() == 'HDF5':
-        import tables as HDF5
-
+        
         def hdf5read(filename):
             file = HDF5.open_file(filename, "r")
             return file
@@ -39,74 +50,86 @@ def openhdf_modes(filename, filetype,hdf4type=None):
             return file
 
         modehdf = {
-                'read'        : hdf5read,
-                'write'       : hdf5write,
-                'append'      : hdf5append
+            'read'        : hdf5read,
+            'write'       : hdf5write,
+            'append'      : hdf5append
 	    }	
 
         
 
     #HDF4
-    # this is more comlicated because you need to know if
-    # you want to read a Scientific Dataset or a Vdata
+    # this is more complicated because you have
+    # two different read types for SDs and VDatas
 
     
     if filetype.upper() == 'HDF4':
         #SD
-        if hdf4type.upper() == 'SD':
-            import pyhdf.SD as HDF4
+        def hdf4readSD(filename):
+            SD      = HDF4SD.SD(filename, HDF4SD.SDC.READ)
+            if is_empty(SD.datasets()): 
+                SD.end()
+                SD = None
+          
+            VDfile  = HDF4.HDF(filename, HDF4.HC.READ)
+            try:
+                VD      = VDfile.vstart()
+            except AttributeError:
+                #there are no Vdata in the file
+                VD = None
+                VDfile.close()
+                VDfile = None
 
-            def hdf4readSD(filename):
-                file = HDF4.SD(filename, HDF4.SDC.READ)
-                file.filename = filename
-                return file
+            file = HDF4file(SD,VD,VDfile)
+            file.filename = filename
 
-            def hdf4writeSD(filename):
-                file = HDF4.SD(filename, HDF4.SSDC.WRITE|HDF4.SSDC.CREATE|HDF4.SSDC.TRUNC)
-                file.filename = filename
-                return file
+            return file
 
-            def hdf4appendSD(filename):
-                file =HDF4.SD(filename,HDF4.SSDC.WRITE)
-                file.filename = filename
-                return file
+        def hdf4writeSD(filename):
+            
+            SD     = HDF4SD.SD(filename, HDF4SD.SSDC.WRITE|HDF4SD.SSDC.CREATE|HDF4SD.SSDC.TRUNC)
+            if is_empty(SD.datasets()): 
+                SD.end()
+                SD = None
+    
+            VDfile = HDF4.HDF.HDF(filename, HDF4.HC.HC.WRITE|HDF4.HC.HC.CREATE|HDF4.HC.HC.TRUNC)
+            try:
+                VD     = VDfile.vstart()
+            except AttributeError:
+                #there are no Vdata in the file
+                VD = None
+                VDfile.close()
+                VDfile = None
 
+            file = HDF4file(SD,VD,VDfile)
+            file.filename = filename
 
-            modehdf = {
-                    'read'        : hdf4readSD,
-                    'write'       : hdf4writeSD,
-                    'append'      : hdf4appendSD
-            }
+            return file
 
+        def hdf4appendSD(filename):
+            SD     = HDF4SD.SD(filename,HDF4SD.SSDC.WRITE)
+            if is_empty(SD.datasets()): 
+                SD.end()
+                SD = None
 
-        #VData
-        if hdf4type.upper() == 'VD':
-            import pyhdf.HDF as HDF4
-            import pyhdf.VS as HDF4VS
+            VDfile = HDF4.HDF.HDF(filename,HDF4.HC.HC.WRITE)
+            try:
+                VD     = VDfile.vstart()
+            except AttributeError:
+                #there are no Vdata in the file
+                VD = None
+                VDfile.close()
+                VDfile = None
 
-            def hdf4readVD(filename):
-                f = HDF4.HDF(filename, HDF4.HC.READ)
-                file = f.vstart()
-                file.filename = filename
-                return file
+            file = HDF4file(SD,VD,VDfile)
+            file.filename = filename
 
-            def hdf4writeVD(filename):
-                f = HDF4.HDF(filename, HDF4.HC.WRITE|HDF4.HC.CREATE|HDF4.HC.TRUNC)
-                file = f.vstart()
-                file.filename = filename
-                return file
+            return file
 
-            def hdf4appendVD(filename):
-                f =HDF4.HDF(filename,HDF4.HC.WRITE)
-                file = f.vstart()
-                file.filename = filename
-                return file
-
-            modehdf = {
-                    'read'        : hdf4readVD,
-                    'write'       : hdf4writeVD,
-                    'append'      : hdf4appendVD
-            }
+        modehdf = {
+            'read'        : hdf4readSD,
+            'write'       : hdf4writeSD,
+            'append'      : hdf4appendSD
+        }
 
 
     return modehdf
