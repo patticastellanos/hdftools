@@ -28,12 +28,14 @@ Download the disk image from this [link] (http://ethan.tira-thompson.com/Mac%20O
 
 Follow the installers prompts and complete the installation in ${LibDir}.
 
-SZIP:
+#####SZIP:
 
 Downlaod the tarball to your install directory
+
 	curl http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/hdf-4.2.10.tar.gz | tar xzf -
 
 Execute the following:
+
 	./configure --prefix=${LibDir} --enable-shared --enable-production
 	make
 	make check
