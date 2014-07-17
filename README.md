@@ -2,7 +2,7 @@
 HDF Tools
 ===========
 
-HDF Tools is a wrapper for the file handling functionality in pyhdf and and PyTables.  It provides a single interface to read, create, and append any HDF file regardless of its format: HDF4, HDF5, or HDF-EOS.
+HDF Tools is a wrapper for the file handling functionality in `pyhdf` and and `PyTables`.  It provides a single interface to read, create, and append any HDF file regardless of its format: HDF4, HDF5, or HDF-EOS.
 It is most useful for earth scientists who want to use a simple function call to handle data files from multiple sources. Typical usage
 often looks like this:
 
