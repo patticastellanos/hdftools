@@ -19,7 +19,8 @@ Installation
 HDF Tools relies on having the HDF4 and HDF5 libraries, as well as the pyhdf and PyTables packages installed. Below are instructions for downloading the most current versions (as of the date of this publcation) of these libraries and packages on Mac OSx.  Please see the deverloper websites for instruction for other platforms or versions.
 
 ##HDF4 Library
-1. Download and install the JPEG, PNG, and SZIP libraries
+
+#Download and install the JPEG, PNG, and SZIP libraries
 
 JPEG and PNG:
 Download the disk image from this `link` <http://ethan.tira-thompson.com/Mac%20OS%20X%20Ports_files/libjpeg-libpng%20%28universal%29.dmg>.
