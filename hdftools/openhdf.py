@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 from test_hdf_type import test_hdf_type
 from openhdf_modes import openhdf_modes 
