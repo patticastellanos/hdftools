@@ -20,24 +20,31 @@ HDF Tools relies on having the HDF4 and HDF5 libraries, as well as the pyhdf and
 
 ##HDF4 Library
 1. Download and install the JPEG, PNG, and SZIP libraries
-* JPEG and PNG:
-			* Download the disk image from this `link <http://ethan.tira-thompson.com/Mac%20OS%20X%20Ports_files/libjpeg-libpng%20%28universal%29.dmg>`_.
-			* Follow the installers prompts and complete the installation in ${LibDir}.
-* SZIP:
-			* Downlaod the tarball to your install directory
-				curl http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/hdf-4.2.10.tar.gz | tar xzf -
-			* Execute the following at the command line:
-				./configure --prefix=${LibDir} --enable-shared --enable-production
-				make
-				make check
-				make install
+
+JPEG and PNG:
+Download the disk image from this `link` <http://ethan.tira-thompson.com/Mac%20OS%20X%20Ports_files/libjpeg-libpng%20%28universal%29.dmg>.
+
+Follow the installers prompts and complete the installation in ${LibDir}.
+
+SZIP:
+
+Downlaod the tarball to your install directory
+	curl http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/hdf-4.2.10.tar.gz | tar xzf -
+
+Execute the following:
+	./configure --prefix=${LibDir} --enable-shared --enable-production
+	make
+	make check
+	make install
+
 2. Download the latest version of HDF4:
-		curl http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/hdf-4.2.10.tar.gz | tar xzf -
-3. Execute the following at the command line:
-		./configure --prefix=${LibDir} --disable-fortran --enable-production --with-szlib=${LibDir} CPPFLAGS=-I${LibDir}/include LDFLAGS=-L${LibDir}/lib
-		make
-		make check
-		make install
+	curl http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/hdf-4.2.10.tar.gz | tar xzf -
+
+3. Execute the following:
+	./configure --prefix=${LibDir} --disable-fortran --enable-production --with-szlib=${LibDir} CPPFLAGS=-I${LibDir}/include LDFLAGS=-L${LibDir}/lib
+	make
+	make check
+	make install
 
 	pyhdf
 	-------------
