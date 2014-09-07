@@ -1,9 +1,9 @@
 #!/usr/bin/python
 import pyhdf.HDF as HDF4
 import tables as HDF5
-""" This is a simple function to return the type of HDF file that is passed to it"""
-def test_hdf_type(filename):
 
+def test_hdf_type(filename):
+        """ This is a simple function to return the type of HDF file that is passed to it"""
 	filetype = None
 
 	"""check to see if file is an hdf4 file
