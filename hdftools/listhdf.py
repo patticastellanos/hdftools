@@ -9,4 +9,4 @@ def listhdf(hdf):
     if hdf.filetype is 'HDF4':
         #look for SD data
         if hdf.SD is not None:
-            print hdf.SD.datasets
+            print hdf.SD.datasets()
