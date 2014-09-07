@@ -1,1 +1,2 @@
-v0.1.0, 17 July 2014 -- Initial release. 
+v0.1.0, 14 July 2014 -- Initial release.
+v0.1.1  7  September 2014 - Reorganized filesystem
