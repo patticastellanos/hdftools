@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import pprint.pprint
+from pprint import pprint
 #########################################################################
 def listhdf(hdf):
     "a function to list the contents of the hdf file"
